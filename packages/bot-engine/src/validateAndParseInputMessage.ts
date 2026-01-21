@@ -9,6 +9,8 @@ import type { SessionStore } from "@typebot.io/runtime-session-store";
 import type { Variable } from "@typebot.io/variables/schemas";
 import { parseCardsReply } from "./blocks/cards/parseCardsReply";
 import { injectVariableValuesInButtonsInputBlock } from "./blocks/inputs/buttons/injectVariableValuesInButtonsInputBlock";
+import { injectVariableValuesInMsgButtonInputBlock } from "./blocks/inputs/msgButton/injectVariableValuesInMsgButtonInputBlock";
+import { parseMsgButtonReply } from "./blocks/inputs/msgButton/parseMsgButtonReply";
 import { parseMultipleChoiceReply } from "./blocks/inputs/buttons/parseMultipleChoiceReply";
 import { parseSingleChoiceReply } from "./blocks/inputs/buttons/parseSingleChoiceReply";
 import { parseDateReply } from "./blocks/inputs/date/parseDateReply";
@@ -75,6 +77,20 @@ export const validateAndParseInputMessage = (
       return parseSingleChoiceReply(message.text, {
         replyId: message.metadata?.replyId,
         items: displayedItems,
+      });
+    }
+    case InputBlockType.MSG_BUTTON: {
+      if (!message || message.type !== "text") return { status: "fail" };
+      const displayedMsgButtonItems = injectVariableValuesInMsgButtonInputBlock(
+        block,
+        {
+          variables,
+          sessionStore,
+        },
+      ).items;
+      return parseMsgButtonReply(message.text, {
+        replyId: message.metadata?.replyId,
+        items: displayedMsgButtonItems,
       });
     }
     case InputBlockType.NUMBER: {

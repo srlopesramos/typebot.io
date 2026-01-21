@@ -2,6 +2,7 @@ import {
   isCardsInput,
   isChoiceInput,
   isConditionBlock,
+  isMsgButtonInput,
   isPictureChoiceInput,
 } from "@typebot.io/blocks-core/helpers";
 import type { BlockV6 } from "@typebot.io/blocks-core/schemas/schema";
@@ -11,11 +12,14 @@ import { isDefined } from "@typebot.io/lib/utils";
 
 export const hasDefaultConnector = (block: BlockV6) =>
   (!isChoiceInput(block) &&
+    !isMsgButtonInput(block) &&
     !isPictureChoiceInput(block) &&
     !isConditionBlock(block) &&
     !isCardsInput(block) &&
     block.type !== LogicBlockType.AB_TEST) ||
   (block.type === InputBlockType.CHOICE &&
+    isDefined(block.options?.dynamicVariableId)) ||
+  (block.type === InputBlockType.MSG_BUTTON &&
     isDefined(block.options?.dynamicVariableId)) ||
   (block.type === InputBlockType.PICTURE_CHOICE &&
     block.options?.dynamicItems?.isEnabled &&

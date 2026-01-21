@@ -11,6 +11,7 @@ import { LogicBlockType } from "@typebot.io/blocks-logic/constants";
 const parseDefaultItems = (type: BlockWithItems["type"]): ItemV6[] => {
   switch (type) {
     case InputBlockType.CHOICE:
+    case InputBlockType.MSG_BUTTON:
     case InputBlockType.PICTURE_CHOICE:
     case LogicBlockType.CONDITION:
       return [{ id: createId() }];

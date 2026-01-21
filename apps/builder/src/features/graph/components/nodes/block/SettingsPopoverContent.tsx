@@ -9,6 +9,7 @@ import { cn } from "@typebot.io/ui/lib/cn";
 import { type JSX, useRef, useState } from "react";
 import { ButtonsBlockSettings } from "@/features/blocks/inputs/buttons/components/ButtonsBlockSettings";
 import { CardsBlockSettings } from "@/features/blocks/inputs/cards/components/CardsBlockSettings";
+import { MsgButtonBlockSettings } from "@/features/blocks/inputs/msgButton/components/MsgButtonBlockSettings";
 import { DateInputSettings } from "@/features/blocks/inputs/date/components/DateInputSettings";
 import { EmailInputSettings } from "@/features/blocks/inputs/emailInput/components/EmailInputSettings";
 import { FileInputSettings } from "@/features/blocks/inputs/fileUpload/components/FileInputSettings";
@@ -191,6 +192,14 @@ export const NodeSettings = ({
     case InputBlockType.CHOICE: {
       return (
         <ButtonsBlockSettings
+          options={node.options}
+          onOptionsChange={updateOptions}
+        />
+      );
+    }
+    case InputBlockType.MSG_BUTTON: {
+      return (
+        <MsgButtonBlockSettings
           options={node.options}
           onOptionsChange={updateOptions}
         />

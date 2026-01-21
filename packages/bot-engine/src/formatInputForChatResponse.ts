@@ -9,6 +9,7 @@ import { deepParseVariables } from "@typebot.io/variables/deepParseVariables";
 import type { Variable } from "@typebot.io/variables/schemas";
 import { injectVariableValuesInCardsBlock } from "./blocks/cards/injectVariableValuesInCardsBlock";
 import { injectVariableValuesInButtonsInputBlock } from "./blocks/inputs/buttons/injectVariableValuesInButtonsInputBlock";
+import { injectVariableValuesInMsgButtonInputBlock } from "./blocks/inputs/msgButton/injectVariableValuesInMsgButtonInputBlock";
 import { parseDateInput } from "./blocks/inputs/date/parseDateInput";
 import { computePaymentInputRuntimeOptions } from "./blocks/inputs/payment/computePaymentInputRuntimeOptions";
 import { injectVariableValuesInPictureChoiceBlock } from "./blocks/inputs/pictureChoice/injectVariableValuesInPictureChoiceBlock";
@@ -31,6 +32,12 @@ export const formatInputForChatResponse = async (
   switch (block.type) {
     case InputBlockType.CHOICE: {
       return injectVariableValuesInButtonsInputBlock(block, {
+        variables,
+        sessionStore,
+      });
+    }
+    case InputBlockType.MSG_BUTTON: {
+      return injectVariableValuesInMsgButtonInputBlock(block, {
         variables,
         sessionStore,
       });

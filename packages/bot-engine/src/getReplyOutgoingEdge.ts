@@ -43,6 +43,17 @@ export const getReplyOutgoingEdge = (
     if (matchedItem?.outgoingEdgeId)
       return { id: matchedItem.outgoingEdgeId, isOffDefaultPath: true };
   }
+  if (block.type === InputBlockType.MSG_BUTTON && reply) {
+    const matchedItem = block.items.find(
+      (item) =>
+        parseVariables(item.buttonText, {
+          variables,
+          sessionStore,
+        })?.normalize() === reply.content.normalize(),
+    );
+    if (matchedItem?.outgoingEdgeId)
+      return { id: matchedItem.outgoingEdgeId, isOffDefaultPath: true };
+  }
   if (
     block.type === InputBlockType.PICTURE_CHOICE &&
     !(

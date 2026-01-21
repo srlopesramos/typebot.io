@@ -2,6 +2,7 @@ import { BubbleBlockType } from "@typebot.io/blocks-bubbles/constants";
 import { defaultChoiceInputOptions } from "@typebot.io/blocks-inputs/choice/constants";
 import type { ButtonItem } from "@typebot.io/blocks-inputs/choice/schema";
 import { InputBlockType } from "@typebot.io/blocks-inputs/constants";
+import type { MsgButtonItem } from "@typebot.io/blocks-inputs/msgButton/schema";
 import { defaultPictureChoiceOptions } from "@typebot.io/blocks-inputs/pictureChoice/constants";
 import type { ContinueChatResponse } from "@typebot.io/chat-api/schemas";
 import { env } from "@typebot.io/env";
@@ -190,6 +191,34 @@ export const convertInputToWhatsAppMessages = async ({
           },
         },
       }));
+    }
+    case InputBlockType.MSG_BUTTON: {
+      const messageText = input.options?.messageText
+        ? input.options.messageText
+        : lastMessageText;
+
+      const validItems = input.items.filter((item) => isDefined(item.buttonText));
+      
+      const buttonLines = validItems.map((item) => {
+        const buttonType = item.buttonType === "url" ? "url" : "text";
+        if (buttonType === "url" && item.buttonUrl) {
+          return `[BUTTON]:"type":"${buttonType}","text":"${item.buttonText}","url":"${item.buttonUrl}"`;
+        }
+        return `[BUTTON]:"type":"${buttonType}","text":"${item.buttonText}"`;
+      });
+
+      const fullMessage = messageText
+        ? `${messageText}\n\n${buttonLines.join("\n")}`
+        : buttonLines.join("\n");
+
+      return [
+        {
+          type: "text",
+          text: {
+            body: fullMessage,
+          },
+        },
+      ];
     }
     case InputBlockType.CARDS: {
       const messages = [];

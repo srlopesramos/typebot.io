@@ -12,6 +12,7 @@ import type {
 } from "@typebot.io/blocks-inputs/cards/schema";
 import type { ButtonItem } from "@typebot.io/blocks-inputs/choice/schema";
 import { InputBlockType } from "@typebot.io/blocks-inputs/constants";
+import type { MsgButtonItem } from "@typebot.io/blocks-inputs/msgButton/schema";
 import type { PictureChoiceItem } from "@typebot.io/blocks-inputs/pictureChoice/schema";
 import type { AbTestBlock } from "@typebot.io/blocks-logic/abTest/schema";
 import type { ConditionItem } from "@typebot.io/blocks-logic/condition/schema";
@@ -178,6 +179,18 @@ const createItem = (
       block.items.splice(itemIndex, 0, newItem);
       return newItem;
     }
+    case InputBlockType.MSG_BUTTON: {
+      const baseItem = item as MsgButtonItem;
+      const newItem = {
+        ...baseItem,
+        id: "id" in item && item.id ? item.id : createId(),
+        buttonText: baseItem.buttonText,
+        buttonType: baseItem.buttonType,
+        buttonUrl: baseItem.buttonUrl,
+      };
+      block.items.splice(itemIndex, 0, newItem);
+      return newItem;
+    }
     case InputBlockType.PICTURE_CHOICE: {
       const baseItem = item as PictureChoiceItem;
       const newItem = {
@@ -262,6 +275,18 @@ export const duplicateItemDraft = (
         id: newItemId,
         content: baseItem.content,
       } satisfies ButtonItem;
+      return { newItem, newEdges };
+    }
+    case InputBlockType.MSG_BUTTON: {
+      const baseItem = item as MsgButtonItem;
+      const newItem = {
+        ...baseItem,
+        outgoingEdgeId: newDefaultOutgoingEdge?.id,
+        id: newItemId,
+        buttonText: baseItem.buttonText,
+        buttonType: baseItem.buttonType,
+        buttonUrl: baseItem.buttonUrl,
+      } satisfies MsgButtonItem;
       return { newItem, newEdges };
     }
     case InputBlockType.PICTURE_CHOICE: {
