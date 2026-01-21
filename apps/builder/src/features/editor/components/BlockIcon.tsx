@@ -36,6 +36,7 @@ import { PixelLogo } from "@/features/blocks/integrations/pixel/components/Pixel
 import { SendEmailIcon } from "@/features/blocks/integrations/sendEmail/components/SendEmailIcon";
 import { ZapierLogo } from "@/features/blocks/integrations/zapier/components/ZapierLogo";
 import { AbTestIcon } from "@/features/blocks/logic/abTest/components/AbTestIcon";
+import { ClientTagIcon } from "@/features/blocks/logic/clientTag/components/ClientTagIcon";
 import { ConditionIcon } from "@/features/blocks/logic/condition/components/ConditionIcon";
 import { JumpIcon } from "@/features/blocks/logic/jump/components/JumpIcon";
 import { RedirectIcon } from "@/features/blocks/logic/redirect/components/RedirectIcon";
@@ -137,6 +138,10 @@ export const BlockIcon = ({ type, className }: BlockIconProps): JSX.Element => {
     case LogicBlockType.SET_VARIABLE:
       return (
         <SetVariableIcon className={cn("text-purple-9 stroke-2", className)} />
+      );
+    case LogicBlockType.CLIENT_TAG:
+      return (
+        <ClientTagIcon className={cn("text-purple-9 stroke-2", className)} />
       );
     case LogicBlockType.CONDITION:
       return (

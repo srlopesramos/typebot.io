@@ -32,6 +32,7 @@ import { PixelSettings } from "@/features/blocks/integrations/pixel/components/P
 import { SendEmailSettings } from "@/features/blocks/integrations/sendEmail/components/SendEmailSettings";
 import { ZapierSettings } from "@/features/blocks/integrations/zapier/components/ZapierSettings";
 import { AbTestSettings } from "@/features/blocks/logic/abTest/components/AbTestSettings";
+import { ClientTagSettings } from "@/features/blocks/logic/clientTag/components/ClientTagSettings";
 import { JumpSettings } from "@/features/blocks/logic/jump/components/JumpSettings";
 import { RedirectSettings } from "@/features/blocks/logic/redirect/components/RedirectSettings";
 import { ScriptSettings } from "@/features/blocks/logic/script/components/ScriptSettings";
@@ -248,6 +249,14 @@ export const NodeSettings = ({
     case LogicBlockType.SET_VARIABLE: {
       return (
         <SetVariableSettings
+          options={node.options}
+          onOptionsChange={updateOptions}
+        />
+      );
+    }
+    case LogicBlockType.CLIENT_TAG: {
+      return (
+        <ClientTagSettings
           options={node.options}
           onOptionsChange={updateOptions}
         />

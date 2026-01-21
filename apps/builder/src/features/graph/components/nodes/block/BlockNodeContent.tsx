@@ -37,6 +37,7 @@ import { PixelNodeBody } from "@/features/blocks/integrations/pixel/components/P
 import { SendEmailContent } from "@/features/blocks/integrations/sendEmail/components/SendEmailContent";
 import { ZapierContent } from "@/features/blocks/integrations/zapier/components/ZapierContent";
 import { AbTestNodeBody } from "@/features/blocks/logic/abTest/components/AbTestNodeBody";
+import { ClientTagContent } from "@/features/blocks/logic/clientTag/components/ClientTagContent";
 import { ConditionBlockContent } from "@/features/blocks/logic/condition/components/ConditionBlockContent";
 import { JumpNodeBody } from "@/features/blocks/logic/jump/components/JumpNodeBody";
 import { RedirectNodeContent } from "@/features/blocks/logic/redirect/components/RedirectNodeContent";
@@ -118,6 +119,9 @@ export const BlockNodeContent = ({
     }
     case LogicBlockType.SET_VARIABLE: {
       return <SetVariableContent block={block} />;
+    }
+    case LogicBlockType.CLIENT_TAG: {
+      return <ClientTagContent block={block} />;
     }
     case LogicBlockType.REDIRECT: {
       return <RedirectNodeContent url={block.options?.url} />;
