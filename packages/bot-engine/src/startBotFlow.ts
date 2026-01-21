@@ -62,6 +62,7 @@ const inputBlocksWithDisplayedContent = [
   InputBlockType.CARDS,
   InputBlockType.PICTURE_CHOICE,
   InputBlockType.CHOICE,
+  InputBlockType.MSG_BUTTON,
   InputBlockType.PAYMENT,
 ];
 

@@ -37,6 +37,8 @@ export const getHelpDocUrl = (
       return "https://docs.typebot.io/editor/blocks/inputs/phone-number";
     case InputBlockType.CHOICE:
       return "https://docs.typebot.io/editor/blocks/inputs/buttons";
+    case InputBlockType.MSG_BUTTON:
+      return "https://docs.typebot.io/editor/blocks/inputs/buttons";
     case InputBlockType.PAYMENT:
       return "https://docs.typebot.io/editor/blocks/inputs/payment";
     case InputBlockType.RATING:

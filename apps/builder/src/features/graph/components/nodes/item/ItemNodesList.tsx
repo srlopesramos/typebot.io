@@ -236,6 +236,7 @@ const checkIfDefaultItemIsNeeded = (
   }
   if (
     block.type === InputBlockType.CHOICE ||
+    block.type === InputBlockType.MSG_BUTTON ||
     block.type === InputBlockType.PICTURE_CHOICE
   )
     return block.items.some((item) => item.outgoingEdgeId === undefined);

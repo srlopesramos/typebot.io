@@ -14,6 +14,7 @@ export enum InputBlockType {
   RATING = "rating input",
   FILE = "file input",
   CARDS = "cards",
+  MSG_BUTTON = "msg button",
 }
 
 export const replyEventInputTypeFromEnum = {
@@ -30,4 +31,5 @@ export const replyEventInputTypeFromEnum = {
   [InputBlockType.RATING]: "rating",
   [InputBlockType.FILE]: "file",
   [InputBlockType.CARDS]: "cards",
+  [InputBlockType.MSG_BUTTON]: "msg button",
 };

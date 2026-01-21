@@ -14,6 +14,7 @@ import { TextBubbleContent } from "@/features/blocks/bubbles/textBubble/componen
 import { VideoBubbleContent } from "@/features/blocks/bubbles/video/components/VideoBubbleContent";
 import { ButtonsBlockNode } from "@/features/blocks/inputs/buttons/components/ButtonsBlockNode";
 import { CardsBlockNode } from "@/features/blocks/inputs/cards/components/CardsBlockNode";
+import { MsgButtonBlockNode } from "@/features/blocks/inputs/msgButton/components/MsgButtonBlockNode";
 import { DateNodeContent } from "@/features/blocks/inputs/date/components/DateNodeContent";
 import { EmailInputNodeContent } from "@/features/blocks/inputs/emailInput/components/EmailInputNodeContent";
 import { FileInputContent } from "@/features/blocks/inputs/fileUpload/components/FileInputContent";
@@ -87,6 +88,9 @@ export const BlockNodeContent = ({
     }
     case InputBlockType.CHOICE: {
       return <ButtonsBlockNode block={block} indices={indices} />;
+    }
+    case InputBlockType.MSG_BUTTON: {
+      return <MsgButtonBlockNode block={block} indices={indices} />;
     }
     case InputBlockType.PICTURE_CHOICE: {
       return <PictureChoiceNode block={block} indices={indices} />;

@@ -6,12 +6,14 @@ import type { BlockWithItems } from "@typebot.io/blocks-core/schemas/schema";
 import type { CardsItem } from "@typebot.io/blocks-inputs/cards/schema";
 import type { ButtonItem } from "@typebot.io/blocks-inputs/choice/schema";
 import { InputBlockType } from "@typebot.io/blocks-inputs/constants";
+import type { MsgButtonItem } from "@typebot.io/blocks-inputs/msgButton/schema";
 import type { PictureChoiceItem } from "@typebot.io/blocks-inputs/pictureChoice/schema";
 import type { ConditionItem } from "@typebot.io/blocks-logic/condition/schema";
 import { LogicBlockType } from "@typebot.io/blocks-logic/constants";
 import type { JSX } from "react";
 import { ButtonsItemNode } from "@/features/blocks/inputs/buttons/components/ButtonsItemNode";
 import { CardsItemNode } from "@/features/blocks/inputs/cards/components/CardsItemNode";
+import { MsgButtonItemNode } from "@/features/blocks/inputs/msgButton/components/MsgButtonItemNode";
 import { PictureChoiceItemNode } from "@/features/blocks/inputs/pictureChoice/components/PictureChoiceItemNode";
 import { ConditionItemNode } from "@/features/blocks/logic/condition/components/ConditionItemNode";
 
@@ -38,6 +40,15 @@ export const ItemNodeContent = ({
         <ButtonsItemNode
           item={item as ButtonItem}
           key={`${item.id}-${(item as ButtonItem).content}`}
+          isMouseOver={isMouseOver}
+          indices={indices}
+        />
+      );
+    case InputBlockType.MSG_BUTTON:
+      return (
+        <MsgButtonItemNode
+          item={item as MsgButtonItem}
+          key={`${item.id}-${(item as MsgButtonItem).buttonText}`}
           isMouseOver={isMouseOver}
           indices={indices}
         />

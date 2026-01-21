@@ -7,6 +7,8 @@ import type { CardsBlock } from "@typebot.io/blocks-inputs/cards/schema";
 import { defaultChoiceInputOptions } from "@typebot.io/blocks-inputs/choice/constants";
 import type { ChoiceInputBlock } from "@typebot.io/blocks-inputs/choice/schema";
 import { InputBlockType } from "@typebot.io/blocks-inputs/constants";
+import { defaultMsgButtonInputOptions } from "@typebot.io/blocks-inputs/msgButton/constants";
+import type { MsgButtonInputBlock } from "@typebot.io/blocks-inputs/msgButton/schema";
 import type { PictureChoiceBlock } from "@typebot.io/blocks-inputs/pictureChoice/schema";
 import type { InputBlock } from "@typebot.io/blocks-inputs/schema";
 import type { TextInputBlock } from "@typebot.io/blocks-inputs/text/schema";
@@ -45,6 +47,9 @@ export const isTextInputBlock = (block: Block): block is TextInputBlock =>
 export const isChoiceInput = (block: Block): block is ChoiceInputBlock =>
   block.type === InputBlockType.CHOICE;
 
+export const isMsgButtonInput = (block: Block): block is MsgButtonInputBlock =>
+  block.type === InputBlockType.MSG_BUTTON;
+
 export const isPictureChoiceInput = (
   block: Block,
 ): block is PictureChoiceBlock => block.type === InputBlockType.PICTURE_CHOICE;
@@ -55,6 +60,16 @@ export const isSingleChoiceInput = (block: Block): block is ChoiceInputBlock =>
   !(
     block.options?.isMultipleChoice ??
     defaultChoiceInputOptions.isMultipleChoice
+  );
+
+export const isSingleMsgButtonInput = (
+  block: Block,
+): block is MsgButtonInputBlock =>
+  block.type === InputBlockType.MSG_BUTTON &&
+  "options" in block &&
+  !(
+    block.options?.isMultipleChoice ??
+    defaultMsgButtonInputOptions.isMultipleChoice
   );
 
 export const isConditionBlock = (block: Block): block is ConditionBlock =>
@@ -102,10 +117,12 @@ export const blockTypeHasItems = (
 ): type is
   | LogicBlockType.CONDITION
   | InputBlockType.CHOICE
+  | InputBlockType.MSG_BUTTON
   | LogicBlockType.AB_TEST
   | InputBlockType.CARDS =>
   type === LogicBlockType.CONDITION ||
   type === InputBlockType.CHOICE ||
+  type === InputBlockType.MSG_BUTTON ||
   type === LogicBlockType.AB_TEST ||
   type === InputBlockType.PICTURE_CHOICE ||
   type === InputBlockType.CARDS;
@@ -129,7 +146,8 @@ export const shouldOpenBlockSettingsOnCreation = (
   type !== InputBlockType.CARDS &&
   type !== InputBlockType.PICTURE_CHOICE &&
   type !== LogicBlockType.CONDITION &&
-  type !== InputBlockType.CHOICE;
+  type !== InputBlockType.CHOICE &&
+  type !== InputBlockType.MSG_BUTTON;
 
 export const shouldOpenItemSettingsOnCreation = (
   type: Block["type"] | undefined,

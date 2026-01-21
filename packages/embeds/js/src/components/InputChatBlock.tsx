@@ -1,6 +1,7 @@
 import type { CardsBlock } from "@typebot.io/blocks-inputs/cards/schema";
 import type { ChoiceInputBlock } from "@typebot.io/blocks-inputs/choice/schema";
 import { InputBlockType } from "@typebot.io/blocks-inputs/constants";
+import type { MsgButtonInputBlock } from "@typebot.io/blocks-inputs/msgButton/schema";
 import type { DateInputBlock } from "@typebot.io/blocks-inputs/date/schema";
 import type { EmailInputBlock } from "@typebot.io/blocks-inputs/email/schema";
 import type { FileInputBlock } from "@typebot.io/blocks-inputs/file/schema";
@@ -24,6 +25,7 @@ import { Match, Show, Switch } from "solid-js";
 import { Buttons } from "@/features/blocks/inputs/buttons/components/Buttons";
 import { MultipleChoicesForm } from "@/features/blocks/inputs/buttons/components/MultipleChoicesForm";
 import { CardsCaroussel } from "@/features/blocks/inputs/cards/CardsCaroussel";
+import { MsgButtons } from "@/features/blocks/inputs/msgButton/components/MsgButtons";
 import { DateForm } from "@/features/blocks/inputs/date/components/DateForm";
 import { EmailInput } from "@/features/blocks/inputs/email/components/EmailInput";
 import { FileUploadForm } from "@/features/blocks/inputs/fileUpload/components/FileUploadForm";
@@ -264,6 +266,16 @@ const Input = (props: {
           onTransitionEnd={props.onTransitionEnd}
         />
       </Match>
+      <Match when={isMsgButtonBlock(props.block)} keyed>
+        {(block) => (
+          <MsgButtons
+            chunkIndex={props.chunkIndex}
+            defaultItems={block.items}
+            options={block.options}
+            onSubmit={props.onSubmit}
+          />
+        )}
+      </Match>
     </Switch>
   );
 };
@@ -272,6 +284,11 @@ const isButtonsBlock = (
   block: ContinueChatResponse["input"],
 ): ChoiceInputBlock | undefined =>
   block?.type === InputBlockType.CHOICE ? block : undefined;
+
+const isMsgButtonBlock = (
+  block: ContinueChatResponse["input"],
+): MsgButtonInputBlock | undefined =>
+  block?.type === InputBlockType.MSG_BUTTON ? block : undefined;
 
 const isPictureChoiceBlock = (
   block: ContinueChatResponse["input"],
