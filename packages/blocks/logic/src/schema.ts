@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { abTestBlockSchemas } from "./abTest/schema";
+import { clientTagBlockSchema } from "./clientTag/schema";
 import { conditionBlockSchemas } from "./condition/schema";
 import { jumpBlockSchema } from "./jump/schema";
 import { redirectBlockSchema } from "./redirect/schema";
@@ -14,6 +15,7 @@ const logicBlockSchemas = [
   scriptBlockSchema,
   redirectBlockSchema,
   setVariableBlockSchema,
+  clientTagBlockSchema,
   typebotLinkBlockSchema,
   waitBlockSchema,
   jumpBlockSchema,

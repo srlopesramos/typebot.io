@@ -15,6 +15,8 @@ export const getHelpDocUrl = (
       return "https://docs.typebot.io/editor/blocks/logic/typebot-link";
     case LogicBlockType.SET_VARIABLE:
       return "https://docs.typebot.io/editor/blocks/logic/set-variable";
+    case LogicBlockType.CLIENT_TAG:
+      return "https://docs.typebot.io/editor/blocks/logic/set-variable";
     case LogicBlockType.REDIRECT:
       return "https://docs.typebot.io/editor/blocks/logic/redirect";
     case LogicBlockType.SCRIPT:

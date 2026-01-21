@@ -5,6 +5,7 @@ import type { Prisma } from "@typebot.io/prisma/types";
 import type { SessionStore } from "@typebot.io/runtime-session-store";
 import type { SetVariableHistoryItem } from "@typebot.io/variables/schemas";
 import { executeAbTest } from "./blocks/logic/abTest/executeAbTest";
+import { executeClientTag } from "./blocks/logic/clientTag/executeClientTag";
 import { executeConditionBlock } from "./blocks/logic/condition/executeConditionBlock";
 import { executeJumpBlock } from "./blocks/logic/jump/executeJumpBlock";
 import { executeRedirect } from "./blocks/logic/redirect/executeRedirect";
@@ -37,6 +38,8 @@ export const executeLogic = async ({
         sessionStore,
         visitedEdges,
       });
+    case LogicBlockType.CLIENT_TAG:
+      return executeClientTag(block, { state, sessionStore });
     case LogicBlockType.CONDITION:
       return executeConditionBlock(block, { state, sessionStore });
     case LogicBlockType.REDIRECT:

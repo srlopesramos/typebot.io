@@ -124,5 +124,14 @@ export const clientSideActionSchema = z.discriminatedUnion("type", [
       type: z.literal("listenForWebhook"),
     })
     .merge(clientSideActionBaseSchema),
+  z
+    .object({
+      type: z.literal("clientTag"),
+      clientTag: z.object({
+        name: z.string(),
+        value: z.string(),
+      }),
+    })
+    .merge(clientSideActionBaseSchema),
 ]);
 export type ClientSideAction = z.infer<typeof clientSideActionSchema>;

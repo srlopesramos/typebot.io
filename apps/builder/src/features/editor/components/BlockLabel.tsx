@@ -69,6 +69,7 @@ export const getLogicBlockLabel = (
   t: TFnType,
 ): { [key in LogicBlockType]: string } => ({
   [LogicBlockType.SET_VARIABLE]: t("editor.sidebarBlock.setVariable.label"),
+  [LogicBlockType.CLIENT_TAG]: "Client Tag",
   [LogicBlockType.CONDITION]: t("editor.sidebarBlock.condition.label"),
   [LogicBlockType.REDIRECT]: t("editor.sidebarBlock.redirect.label"),
   [LogicBlockType.SCRIPT]: t("editor.sidebarBlock.script.label"),
